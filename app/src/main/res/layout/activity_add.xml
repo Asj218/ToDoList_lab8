@@ -21,23 +21,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/radioHigh"
-            android:layout_width="102dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Высокий" />
+            android:background="@android:color/holo_red_light"
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/radioMedium"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
-            android:text="Средний" />
+            <RadioButton
+                android:id="@+id/radioHigh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Высокий"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/radioLow"
-            android:layout_width="102dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Низкий" />
+            android:background="@android:color/holo_orange_light"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Средний"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_light"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioLow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Низкий"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
     </RadioGroup>
 
     <Button
