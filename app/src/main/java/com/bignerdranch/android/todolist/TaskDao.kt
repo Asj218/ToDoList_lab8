@@ -13,7 +13,7 @@ interface TaskDao {
     suspend fun insert(task: Task)
 
     @Query("SELECT * FROM tasks ORDER BY priority ASC")
-    suspend fun getAllTasks(): List<Task>
+    fun getAllTasks(): LiveData<List<Task>>
 
     @Delete
     suspend fun delete(task: Task)
