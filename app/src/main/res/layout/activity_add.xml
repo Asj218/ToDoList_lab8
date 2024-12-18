@@ -1,73 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <EditText
-        android:id="@+id/editTextTask"
-        android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:hint="Введите задачу" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Приоритет" />
+    tools:context=".AddActivity">
 
     <RadioGroup
-        android:id="@+id/radioGroupPriority"
+        android:id="@+id/priority_group"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_red_light"
-            android:orientation="horizontal">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <RadioButton
-                android:id="@+id/radioHigh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Высокий"
-                android:background="@android:color/transparent" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_light"
-            android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/low_priority"
+            android:layout_width="65dp"
+            android:layout_height="52dp"
+            android:layout_marginEnd="72dp"
+            android:text="Low"
+            app:layout_constraintEnd_toStartOf="@+id/medium_priority"
+            app:layout_constraintTop_toBottomOf="@+id/description_input" />
 
-            <RadioButton
-                android:id="@+id/radioMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Средний"
-                android:background="@android:color/transparent" />
-        </LinearLayout>
+        <RadioButton
+            android:id="@+id/medium_priority"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="84dp"
+            android:text="Medium"
+            app:layout_constraintEnd_toStartOf="@+id/high_priority"
+            app:layout_constraintTop_toBottomOf="@+id/description_input" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_light"
-            android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/high_priority"
+            android:layout_width="71dp"
+            android:layout_height="49dp"
+            android:text="High"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_input" />
 
-            <RadioButton
-                android:id="@+id/radioLow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Низкий"
-                android:background="@android:color/transparent" />
-        </LinearLayout>
     </RadioGroup>
 
     <Button
-        android:id="@+id/buttonAdd"
+        android:id="@+id/add_button"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="Add Task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_input" />
+
+    <EditText
+        android:id="@+id/description_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Добавить" />
+        android:hint="Task Description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priority_group" />
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

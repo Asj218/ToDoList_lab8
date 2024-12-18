@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class Task(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val description: String,
-    val priority: Int
+    val priority: Int // 1 - High, 2 - Medium, 3 - Low
 )

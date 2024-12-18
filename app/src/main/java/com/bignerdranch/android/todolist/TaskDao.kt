@@ -1,14 +1,13 @@
 package com.bignerdranch.android.todolist
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Delete
-import androidx.lifecycle.LiveData
 
 @Dao
 interface TaskDao {
-
     @Insert
     suspend fun insert(task: Task)
 
@@ -18,4 +17,5 @@ interface TaskDao {
     @Delete
     suspend fun delete(task: Task)
 }
+
 

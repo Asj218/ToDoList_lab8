@@ -1,15 +1,22 @@
 package com.bignerdranch.android.todolist
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
-    val allTasks = repository.allTasks // Теперь корректно с LiveData
+class TaskViewModel(private val taskDao: TaskDao) : ViewModel() {
+    val allTasks: LiveData<List<Task>> = taskDao.getAllTasks()
 
     fun insert(task: Task) {
         viewModelScope.launch {
-            repository.insert(task)
+            taskDao.insert(task)
+        }
+    }
+
+    fun delete(task: Task) {
+        viewModelScope.launch {
+            taskDao.delete(task)
         }
     }
 }

@@ -3,36 +3,50 @@ package com.bignerdranch.android.todolist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todolist.R
 
 class TaskAdapter : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
-        return TaskViewHolder(view)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.task_item, parent, false)
+        return TaskViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val task = getItem(position)
-        // Привязка данных к элементам представления
-        holder.bind(task)
+        val currentTask = getItem(position)
+        holder.bind(currentTask)
     }
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val taskDescription: TextView = itemView.findViewById(R.id.task_description)
+
         fun bind(task: Task) {
-            // Привязка данных задачи к элементам представления
+            taskDescription.text = task.description
+            // Установите цвет в зависимости от приоритета
+            when (task.priority) {
+                1 -> itemView.setBackgroundColor(0xFFFF0000.toInt()) // Красный для High
+                2 -> itemView.setBackgroundColor(0xFFFFFF00.toInt()) // Желтый для Medium
+                3 -> itemView.setBackgroundColor(0xFF00FF00.toInt()) // Зеленый для Low
+            }
         }
     }
-}
 
-class TaskDiffCallback : DiffUtil.ItemCallback<Task>() {
-    override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
-        return oldItem.id == newItem.id // Предполагается, что у задачи есть уникальный идентификатор
+    class TaskDiffCallback : DiffUtil.ItemCallback<Task>() {
+        override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
+            return oldItem == newItem
+        }
     }
 
-    override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
-        return oldItem == newItem
+    fun getItemAtPosition(position: Int): Task {
+        return getItem(position) // Возвращаем элемент по позиции
     }
 }

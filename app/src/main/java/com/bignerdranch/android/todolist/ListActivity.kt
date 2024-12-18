@@ -4,32 +4,37 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todolist.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListActivity : AppCompatActivity() {
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var fab: FloatingActionButton
-    // Создаем экземпляр TaskViewModelFactory
-    private val viewModel: TaskViewModel by viewModels { (application as TodoApplication).viewModelFactory }
+    private lateinit var taskViewModel: TaskViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-        recyclerView = findViewById(R.id.recyclerView)
-        fab = findViewById(R.id.fab)
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
         val adapter = TaskAdapter()
         recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        viewModel.allTasks.observe(this) { tasks ->
+        val taskDao = AppDatabase.getDatabase(application).taskDao()
+        val factory = TaskViewModelFactory(taskDao)
+        taskViewModel = ViewModelProvider(this, factory).get(TaskViewModel::class.java)
+
+        taskViewModel.allTasks.observe(this, { tasks ->
             tasks?.let { adapter.submitList(it) }
-        }
+        })
 
-        fab.setOnClickListener {
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter, taskViewModel))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             startActivity(Intent(this, AddActivity::class.java))
         }
     }
