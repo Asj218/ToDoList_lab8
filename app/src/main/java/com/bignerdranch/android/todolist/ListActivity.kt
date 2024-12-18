@@ -12,7 +12,7 @@ class ListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var fab: FloatingActionButton
     // Создаем экземпляр TaskViewModelFactory
-    private val viewModel: TaskViewModel by viewModels { TaskViewModelFactory((application as TodoApplication).repository) }
+    private val viewModel: TaskViewModel by viewModels { (application as TodoApplication).viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
