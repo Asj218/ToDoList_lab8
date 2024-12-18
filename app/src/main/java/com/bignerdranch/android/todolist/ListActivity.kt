@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
+
 class ListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var fab: FloatingActionButton
