@@ -24,14 +24,17 @@ class TaskAdapter : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallba
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val taskDescription: TextView = itemView.findViewById(R.id.task_description)
+        private val taskDescript: TextView = itemView.findViewById(R.id.subtitle_input)
 
         fun bind(task: Task) {
             taskDescription.text = task.description
-            // Установите цвет в зависимости от приоритета
+            taskDescript.text = task.descript
+
+            // Установка цвета в зависимости от приоритета
             when (task.priority) {
-                1 -> itemView.setBackgroundColor(0xFFFF0000.toInt()) // Красный для High
-                2 -> itemView.setBackgroundColor(0xFFFFFF00.toInt()) // Желтый для Medium
-                3 -> itemView.setBackgroundColor(0xFF00FF00.toInt()) // Зеленый для Low
+                1 -> itemView.setBackgroundColor(0xffff4444.toInt())
+                2 -> itemView.setBackgroundColor(0xffffbb33.toInt())
+                3 -> itemView.setBackgroundColor(0xff99cc00.toInt())
             }
         }
     }
